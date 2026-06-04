@@ -1,16 +1,19 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Inject, Param } from '@nestjs/common';
+
 import { FilmsService } from './films.service';
 
 @Controller('films')
 export class FilmsController {
-  constructor (private readonly FilmsService: FilmsService) {}
+  constructor(
+    @Inject(FilmsService) private readonly filmsService: FilmsService,
+  ) {}
   @Get('')
   public getFilms() {
-    return this.FilmsService.getFilms();
+    return this.filmsService.getFilms();
   }
 
   @Get('/:id/schedule')
   public getFilmById(@Param('id') id: string) {
-    return this.FilmsService.getSchedule(id)
+    return this.filmsService.getSchedule(id);
   }
 }

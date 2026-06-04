@@ -3,11 +3,11 @@ import { FilmsMongoDbRepository } from 'src/films-mongo-db.repository/films-mong
 
 @Injectable()
 export class FilmsService {
-  constructor (private readonly filmsRepository: FilmsMongoDbRepository) {}
+  constructor(private readonly filmsRepository: FilmsMongoDbRepository) {}
   async getFilms() {
     return this.filmsRepository.findAll();
   }
   async getSchedule(id: string) {
-    return this.filmsRepository.findScheduleByFilmId(id)
+    return this.filmsRepository.findScheduleByFilmId(id);
   }
 }

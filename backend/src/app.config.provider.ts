@@ -1,13 +1,12 @@
-import {ConfigModule, ConfigService} from "@nestjs/config";
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import mongoose from 'mongoose';
 
-
 export const configProvider = {
-    imports: [ConfigModule.forRoot()],
-    provide: 'CONFIG',
-    inject: [ConfigService],
-    useFactory: async (configService: ConfigService): Promise<AppConfig> => {
-  const config = {
+  imports: [ConfigModule.forRoot()],
+  provide: 'CONFIG',
+  inject: [ConfigService],
+  useFactory: async (configService: ConfigService): Promise<AppConfig> => {
+    const config = {
       database: {
         driver: configService.get<string>('DATABASE_DRIVER') || 'mongodb',
         url:
@@ -20,14 +19,13 @@ export const configProvider = {
 
     return config;
   },
-    
-}
+};
 
 export interface AppConfig {
-    database: AppConfigDatabase
+  database: AppConfigDatabase;
 }
 
 export interface AppConfigDatabase {
-    driver: string
-    url: string
+  driver: string;
+  url: string;
 }

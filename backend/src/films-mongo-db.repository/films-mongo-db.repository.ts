@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { GetFilmDto } from '../films/dto/getFilm.dto'
-import { GetFilmsDto } from '../films/dto/getFilms.dto'
+import { GetFilmDto } from '../films/dto/getFilm.dto';
+import { GetFilmsDto } from '../films/dto/getFilms.dto';
 
-import mongoose, { Model, Schema, Mongoose } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import { GetScheduleByFilmIdDto } from '../films/dto/getScheduleByFilmId.dto';
 
 const ScheduleSchema = new Schema(
@@ -40,14 +40,14 @@ export const FilmSchema = new Schema({
   },
 });
 
-const Film = mongoose.model('Film', FilmSchema)
+const Film = mongoose.model('Film', FilmSchema);
 export default Film;
 
 @Injectable()
 export class FilmsMongoDbRepository {
-  constructor () {}
+  constructor() {}
   private getFilmMapperFn(): (film: any) => GetFilmDto {
-    return root => {
+    return (root) => {
       const film = root.toObject();
 
       return {
@@ -62,36 +62,36 @@ export class FilmsMongoDbRepository {
         about: film.about,
         description: film.description,
         schedule: film.schedule,
-        };
+      };
     };
   }
   async findAll(): Promise<GetFilmsDto> {
-    let items = await Film.find({})
-    let total = await Film.countDocuments({})
-    
+    const items = await Film.find({});
+    const total = await Film.countDocuments({});
+
     return {
       total: total,
-      items: items.map(this.getFilmMapperFn())
-    }
+      items: items.map(this.getFilmMapperFn()),
+    };
   }
   async findById(id: string): Promise<GetFilmDto> {
-    let film = await Film.findOne({ id })
+    const film = await Film.findOne({ id });
     if (!film) {
-      throw new NotFoundException(`Фильм с id ${id} не найден`)
+      throw new NotFoundException(`Фильм с id ${id} не найден`);
     }
     const mapper = this.getFilmMapperFn();
-    return mapper(film)
+    return mapper(film);
   }
 
   async findScheduleByFilmId(id: string): Promise<GetScheduleByFilmIdDto> {
     const film = await this.findById(id);
-    const length = film.schedule.length
+    const length = film.schedule.length;
     return {
       total: length,
-      items: film.schedule
+      items: film.schedule,
     };
   }
-  
+
   async reservePlace(filmId: string, sessionId: string, place: string) {
     const result = await Film.updateOne(
       {
@@ -108,5 +108,4 @@ export class FilmsMongoDbRepository {
 
     return result.modifiedCount > 0;
   }
-
 }

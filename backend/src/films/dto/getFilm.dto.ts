@@ -1,12 +1,11 @@
-
-  interface Schedule {
-  id: string,
-  daytime: Date,
-  hall: number,
-  rows: number,
-  seats: number,
-  price: number,
-  taken: string[]
+interface Schedule {
+  id: string;
+  daytime: Date;
+  hall: number;
+  rows: number;
+  seats: number;
+  price: number;
+  taken: string[];
 }
 
 export class GetFilmDto {
@@ -20,5 +19,5 @@ export class GetFilmDto {
   title: string;
   about: string;
   description: string;
-  schedule: Schedule[]
+  schedule: Schedule[];
 }

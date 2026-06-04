@@ -4,10 +4,10 @@ import { CreateOrderDto } from './dto/order.dto';
 
 @Controller('order')
 export class OrderController {
-  constructor (private readonly orderService: OrderService) {}
+  constructor(private readonly orderService: OrderService) {}
 
   @Post('')
   public create(@Body() body: CreateOrderDto) {
-    return this.orderService.createOrder(body)
+    return this.orderService.createOrder(body);
   }
 }
