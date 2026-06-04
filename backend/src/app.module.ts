@@ -4,6 +4,12 @@ import {ConfigModule} from "@nestjs/config";
 import * as path from "node:path";
 
 import {configProvider} from "./app.config.provider";
+import { FilmsController } from './films/films.controller';
+import { OrderController } from './order/order.controller';
+import { FilmsService } from './films/films.service';
+import { OrderService } from './order/order.service';
+import { FilmsMongoDbRepository } from './films-mongo-db.repository/films-mongo-db.repository';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
@@ -11,9 +17,13 @@ import {configProvider} from "./app.config.provider";
           isGlobal: true,
           cache: true
       }),
-      // @todo: Добавьте раздачу статических файлов из public
+  ServeStaticModule.forRoot({
+          rootPath: path.resolve(__dirname, '..', 'public', 'content', 'afisha'),
+          serveRoot: '/content/afisha',
+  }),
+  
   ],
-  controllers: [],
-  providers: [configProvider],
+  controllers: [FilmsController, OrderController],
+  providers: [configProvider, FilmsService, OrderService, FilmsMongoDbRepository],
 })
 export class AppModule {}
