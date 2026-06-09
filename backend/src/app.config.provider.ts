@@ -1,5 +1,5 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
 
 export const configProvider = {
   imports: [ConfigModule.forRoot()],
@@ -8,14 +8,16 @@ export const configProvider = {
   useFactory: async (configService: ConfigService): Promise<AppConfig> => {
     const config = {
       database: {
-        driver: configService.get<string>('DATABASE_DRIVER') || 'mongodb',
+        driver: configService.get<string>('DATABASE_DRIVER') || 'postgres',
         url:
           configService.get<string>('DATABASE_URL') ||
-          'mongodb://127.0.0.1:27017/afisha',
+          'postgres://localhost:5432/prac',
+        username: configService.get<string>('DATABASE_USERNAME') || 'prac',
+        password: configService.get<string>('DATABASE_PASSWORD') || 'prac',
       },
     };
 
-    await mongoose.connect(config.database.url);
+    // await mongoose.connect(config.database.url);
 
     return config;
   },
@@ -28,4 +30,6 @@ export interface AppConfig {
 export interface AppConfigDatabase {
   driver: string;
   url: string;
+  username: string;
+  password: string;
 }

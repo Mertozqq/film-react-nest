@@ -3,12 +3,12 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { FilmsMongoDbRepository } from '../films-mongo-db.repository/films-mongo-db.repository';
 import { CreateOrderDto, OrderResponseDto } from './dto/order.dto';
+import { AppRepository } from '../repository/app.repository';
 
 @Injectable()
 export class OrderService {
-  constructor(private readonly filmsRepository: FilmsMongoDbRepository) {}
+  constructor(private readonly filmsRepository: AppRepository) {}
 
   async createOrder(order: CreateOrderDto): Promise<OrderResponseDto> {
     const reservedTickets = [];
