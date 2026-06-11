@@ -16,7 +16,7 @@ import { AppRepository } from './app.repository';
         url: configService.get<string>('DATABASE_URL'),
         username: configService.get<string>('DATABASE_USERNAME'),
         password: configService.get<string>('DATABASE_PASSWORD'),
-        entities: [Film, Schedule],
+        entities: [__dirname + '/../**/*.entity{.ts,.js}'],
         synchronize: true,
       }),
     }),

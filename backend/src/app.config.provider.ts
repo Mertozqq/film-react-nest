@@ -1,5 +1,4 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
-// import mongoose from 'mongoose';
 
 export const configProvider = {
   imports: [ConfigModule.forRoot()],
@@ -17,7 +16,6 @@ export const configProvider = {
       },
     };
 
-    // await mongoose.connect(config.database.url);
 
     return config;
   },
