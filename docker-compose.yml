@@ -2,7 +2,7 @@ services:
   frontend:
     build:
       context: ./frontend
-    image: ghcr.io/mertozqq/film-react-nest-frontend:latest
+    image: ghcr.io/mertozqq/film-react-nest-frontend:review
     volumes:
       - frontend_dist:/frontend-dist
     healthcheck:
@@ -16,7 +16,7 @@ services:
   backend:
     build:
       context: ./backend
-    image: ghcr.io/mertozqq/film-react-nest-backend:latest
+    image: ghcr.io/mertozqq/film-react-nest-backend:review
     depends_on:
       postgres:
         condition: service_healthy
@@ -43,7 +43,7 @@ services:
   nginx:
     build:
       context: ./nginx
-    image: ghcr.io/mertozqq/film-react-nest-nginx:latest
+    image: ghcr.io/mertozqq/film-react-nest-nginx:review
     depends_on:
       frontend:
         condition: service_healthy

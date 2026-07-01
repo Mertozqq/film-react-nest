@@ -3,7 +3,7 @@ name: Build and publish Docker images
 on:
   push:
     branches:
-      - main
+      - review
   workflow_dispatch:
 
 permissions:
@@ -43,7 +43,7 @@ jobs:
           context: ${{ matrix.context }}
           push: true
           tags: |
-            ghcr.io/mertozqq/film-react-nest-${{ matrix.name }}:latest
+            ghcr.io/mertozqq/film-react-nest-${{ matrix.name }}:review
             ghcr.io/mertozqq/film-react-nest-${{ matrix.name }}:${{ github.sha }}
           cache-from: type=gha,scope=${{ matrix.name }}
           cache-to: type=gha,mode=max,scope=${{ matrix.name }}
