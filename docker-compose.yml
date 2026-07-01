@@ -5,6 +5,11 @@ services:
     image: ghcr.io/mertozqq/film-react-nest-frontend:latest
     volumes:
       - frontend_dist:/frontend-dist
+    healthcheck:
+      test: ["CMD-SHELL", "test -f /frontend-dist/index.html"]
+      interval: 2s
+      timeout: 2s
+      retries: 10
     networks:
       - app_network
 
@@ -41,7 +46,7 @@ services:
     image: ghcr.io/mertozqq/film-react-nest-nginx:latest
     depends_on:
       frontend:
-        condition: service_completed_successfully
+        condition: service_healthy
       backend:
         condition: service_healthy
     ports:

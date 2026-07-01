@@ -20,4 +20,4 @@ WORKDIR /dist
 
 COPY --from=build /app/dist ./
 
-CMD ["sh", "-c", "rm -rf /frontend-dist/* && cp -R /dist/. /frontend-dist/"]
+CMD ["sh", "-c", "rm -rf /frontend-dist/* && cp -R /dist/. /frontend-dist/ && exec tail -f /dev/null"]
