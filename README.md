@@ -1,5 +1,6 @@
 # FILM!
-
+## Ссылка на задеплоенное приложение:  
+http://17pr.nomorepartiessite.ru/
 ## Установка
 
 ### MongoDB
