@@ -2,7 +2,7 @@ import { Injectable, LoggerService } from '@nestjs/common';
 
 @Injectable()
 export class TskvLogger implements LoggerService {
-  private stringify(value: any): string {
+  private stringify(value: unknown): string {
     if (typeof value === 'string') {
       return value;
     }
@@ -20,7 +20,7 @@ export class TskvLogger implements LoggerService {
       .replace(/\r/g, `\\r`);
   }
 
-  private formatMessage(level: string, message: any, ...optionalParams: any[]) {
+  private formatMessage(level: string, message: unknown, ...optionalParams: unknown[]) {
     const params = optionalParams
       .map((val, index) => {
         return `param${index}=${this.escape(this.stringify(val))}`;
@@ -38,29 +38,29 @@ export class TskvLogger implements LoggerService {
     );
   }
   // используется  process.stdout / stderr тк console.log автоматически переносит на новую строку, получается лишний перенос
-  log(message: any, ...optionalParams: any[]) {
+  log(message: unknown, ...optionalParams: unknown[]) {
     process.stdout.write(this.formatMessage('log', message, ...optionalParams));
   }
 
-  error(message: any, ...optionalParams: any[]) {
+  error(message: unknown, ...optionalParams: unknown[]) {
     process.stderr.write(
       this.formatMessage('error', message, ...optionalParams),
     );
   }
 
-  warn(message: any, ...optionalParams: any[]) {
+  warn(message: unknown, ...optionalParams: unknown[]) {
     process.stdout.write(
       this.formatMessage('warn', message, ...optionalParams),
     );
   }
 
-  debug(message: any, ...optionalParams: any[]) {
+  debug(message: unknown, ...optionalParams: unknown[]) {
     process.stdout.write(
       this.formatMessage('debug', message, ...optionalParams),
     );
   }
 
-  verbose(message: any, ...optionalParams: any[]) {
+  verbose(message: unknown, ...optionalParams: unknown[]) {
     process.stdout.write(
       this.formatMessage('verbose', message, ...optionalParams),
     );

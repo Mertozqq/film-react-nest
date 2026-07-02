@@ -4,3 +4,5 @@ certbot/*
 !certbot/www/
 certbot/www/*
 !certbot/www/.gitkeep
+.env
+! .env.examle
