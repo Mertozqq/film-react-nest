@@ -13,9 +13,7 @@ describe('OrderController', () => {
       createOrder,
     };
 
-    controller = new OrderController(
-      orderService as unknown as OrderService,
-    );
+    controller = new OrderController(orderService as unknown as OrderService);
   });
 
   it('passes an order to the service and returns its result', async () => {

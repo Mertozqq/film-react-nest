@@ -25,13 +25,6 @@ import { TskvLogger } from './tskv-logger/tskv-logger.service';
     RepositoryModule,
   ],
   controllers: [FilmsController, OrderController],
-  providers: [
-    FilmsService,
-    OrderService,
-    DevLogger,
-    JsonLogger,
-    TskvLogger,
-    
-  ],
+  providers: [FilmsService, OrderService, DevLogger, JsonLogger, TskvLogger],
 })
 export class AppModule {}

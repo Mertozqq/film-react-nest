@@ -1,2 +1,6 @@
 node_modules
 .idea
+certbot/*
+!certbot/www/
+certbot/www/*
+!certbot/www/.gitkeep

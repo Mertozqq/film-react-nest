@@ -16,7 +16,6 @@ export const configProvider = {
       },
     };
 
-
     return config;
   },
 };

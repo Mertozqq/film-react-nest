@@ -1,4 +1,3 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { TskvLogger } from './tskv-logger.service';
 
 describe('TskvLoggerService', () => {
@@ -12,14 +11,17 @@ describe('TskvLoggerService', () => {
   afterEach(() => {
     jest.restoreAllMocks();
     jest.useRealTimers();
-  })
+  });
 
   it('fromat default message', () => {
-    const write = jest.spyOn(process.stdout, 'write')
-      .mockImplementation(() => true)
-    logger.log('123')
-    expect(write).toHaveBeenCalledWith('level=log\tmessage=123\ttimestamp=2026-06-30T12:00:00.000Z\n')
-  })
+    const write = jest
+      .spyOn(process.stdout, 'write')
+      .mockImplementation(() => true);
+    logger.log('123');
+    expect(write).toHaveBeenCalledWith(
+      'level=log\tmessage=123\ttimestamp=2026-06-30T12:00:00.000Z\n',
+    );
+  });
 
   it('optional parameters check', () => {
     const write = jest
@@ -45,4 +47,3 @@ describe('TskvLoggerService', () => {
     );
   });
 });
-

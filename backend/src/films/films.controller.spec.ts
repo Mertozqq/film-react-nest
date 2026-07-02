@@ -15,9 +15,7 @@ describe('FilmsController', () => {
       getSchedule,
     };
 
-    controller = new FilmsController(
-      filmsService as unknown as FilmsService,
-    );
+    controller = new FilmsController(filmsService as unknown as FilmsService);
   });
 
   it('returns films from the service', async () => {

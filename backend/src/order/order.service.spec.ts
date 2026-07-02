@@ -1,7 +1,4 @@
-import {
-  BadRequestException,
-  NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { AppRepository } from '../repository/app.repository';
 import { CreateOrderDto } from './dto/order.dto';
 import { OrderService } from './order.service';
@@ -54,11 +51,7 @@ describe('OrderService', () => {
       items: order.tickets,
     });
     expect(findById).toHaveBeenCalledWith('film-42');
-    expect(reservePlace).toHaveBeenCalledWith(
-      'film-42',
-      'session-7',
-      '3:8',
-    );
+    expect(reservePlace).toHaveBeenCalledWith('film-42', 'session-7', '3:8');
   });
 
   it('throws when the session does not exist', async () => {
@@ -66,9 +59,7 @@ describe('OrderService', () => {
       schedule: [],
     });
 
-    await expect(service.createOrder(order)).rejects.toThrow(
-      NotFoundException,
-    );
+    await expect(service.createOrder(order)).rejects.toThrow(NotFoundException);
     expect(reservePlace).not.toHaveBeenCalled();
   });
 
@@ -102,10 +93,6 @@ describe('OrderService', () => {
     await expect(service.createOrder(order)).rejects.toThrow(
       BadRequestException,
     );
-    expect(reservePlace).toHaveBeenCalledWith(
-      'film-42',
-      'session-7',
-      '3:8',
-    );
+    expect(reservePlace).toHaveBeenCalledWith('film-42', 'session-7', '3:8');
   });
 });
